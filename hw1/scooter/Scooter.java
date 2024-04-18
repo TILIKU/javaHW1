@@ -21,12 +21,12 @@ public class Scooter {
     public int getId() {
         return id;
     }
-    
+
     //sets the id of a scooter
     public void setId(int id) {
         this.id = id;
     }
-    
+
     //returns the model of the scooter
     public String getModel() {
         return model;
@@ -36,12 +36,12 @@ public class Scooter {
     public void setModel(String model) {
         this.model = model;
     }
-    
+
     //returns the battery level of a scooter
     public int getBatteryLevel() {
         return batteryLevel;
     }
-    
+
     //sets the battery level of a scooter
     public void setBatteryLevel(int batteryLevel) {
         this.batteryLevel = batteryLevel;
@@ -90,3 +90,4 @@ public class Scooter {
         return sb.toString();
     }
 }
+

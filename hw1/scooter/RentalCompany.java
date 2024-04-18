@@ -1,6 +1,7 @@
 package homeworks.hw1.scooter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RentalCompany {
 
@@ -18,14 +19,13 @@ public class RentalCompany {
         }
         return result;
     }
-    
-    //adds scooter to the scooters list 
+
+    //adds scooter to the scooters list
     public void addScooter(Scooter scooter) {
-        scooter.setId(uid++);
         scooters.add(scooter);
-    }       
-    
-    //removes a scooter by id 
+    }
+
+    //removes a scooter by id
     public boolean removeScooter(int id) {
         boolean removed = false;
         for (Scooter scooter: scooters) {
@@ -39,67 +39,40 @@ public class RentalCompany {
     }
 
     // function to rent a scooter
-    public void rentScooter(int id) {
-    	boolean rented = false;
-    	for (Scooter scooter: scooters) {
+    public boolean rentScooter(int id) {
+        boolean rented = false;
+        for (Scooter scooter: scooters) {
             if (scooter.getId() == id && scooter.isAvailable()) {
                 rented = true;
-                scooter.setAvailable = false;
+                scooter.setAvailable(false);
                 break;
             }
         }
-    	return rented;
+        return rented;
     }
 
     // function to call when user returns a rented scooter
     public void returnScooter(int id, double x, double y) {
-    	for (Scooter scooter: scooters) {
-            if (scooter.getId() == id && scooter.isAvailable() == false) {
-                scooter.setAvailable = true;
+        for (Scooter scooter: scooters) {
+            if (scooter.getId() == id && !scooter.isAvailable()) {
+                scooter.setAvailable(true);
                 scooter.setY(y);
                 scooter.setX(x);
                 break;
             }
         }
-    	return scooter.isAvailable();
-    }	
-    
+    }
+
     // function to print out all of the scooters information
     public void displayAllScooters() {
-    	for (Scooter scooter: scooters) {
-    		System.out.println("id: " + scooter.getId());
-    		System.out.print(" model" + scooter.getModel());
-    		System.out.print(" battery level:" + scooter.getBatteryLevel());
-    		System.out.print(" X coordinate:" + scooter.getX());
-    		System.out.print(" Y coordinate:" + scooter.getY());
-    		System.out.print(" is available:" + scooter.isAvailable());
-    		System.out.println("");
+        for (Scooter scooter: scooters) {
+            System.out.println("id: " + scooter.getId());
+            System.out.print(" model: " + scooter.getModel());
+            System.out.print(" battery level:" + scooter.getBatteryLevel());
+            System.out.print(" X coordinate:" + scooter.getX());
+            System.out.print(" Y coordinate:" + scooter.getY());
+            System.out.print(" is available:" + scooter.isAvailable());
+            System.out.println("");
         }
     }
-}
-
-class ScooterRentalTester {
-	public static void main(String[] args) {
-        // Create an instance of RentalCompany
-        RentalCompany rentalCompany = new RentalCompany();
-
-        // create two new scooters because we dont have any for now
-        rentalCompany.addScooter(new Scooter("lvl10GYAT", 24, 20, 21)); // initialising with model, battery, x, y,(coordinates)
-        rentalCompany.addScooter(new Scooter("rizz", 100, 41.706842030585925, 44.738849390210085)); // initialising this scooter in my "home" location
-        
-
-        rentalCompany.rentScooter(1); // Rent a scooter with ID 1 
-        
-        rentalCompany.returnScooter(1, 41.7121106, 44.7489232); //Return the rented scooter to uni for parking
-        
-        Thread.sleep(3600 * 1000);// sleep the program for 1 hour
-        
-        rentalCompany.rentScooter(1); // Rent a scooter with ID 1 again
-
-        rentalCompany.returnScooter(1, 41.706842030585925, 44.738849390210085); // Return a rented scooter with ID 1 in BTU (because i dont want to share my home address) 
-
-        
-        
-    }
-	
 }
